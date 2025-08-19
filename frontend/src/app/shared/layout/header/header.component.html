@@ -1,0 +1,66 @@
+<header class="header">
+  <div class="container">
+    <a href="javascript:void(0)" class="logo">
+      <img src="/assets/images/logo.png" alt="Logo">
+    </a>
+
+    <div class="header-content">
+      <div class="header-top">
+        <div class="header-top-menu">
+          <nav>
+            <ul>
+              <li>
+                <a>Главная</a>
+              </li>
+              <li>
+                <a>Каталог</a>
+              </li>
+              <li>
+                <a>Отзывы</a>
+              </li>
+              <li>
+                <a>Доставка и оплата</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <a class="header-top-phone" href="tel:+375299182888">
+          + 375 (29) 918-28-88
+        </a>
+
+        <div class="header-top-actions">
+          <a>
+            <img src="/assets/images/icons/login.svg" alt="login">
+          </a>
+
+          <a>
+            <img src="/assets/images/icons/heart.svg" alt="heart">
+          </a>
+
+          <a>
+            <img src="/assets/images/icons/bag.svg" alt="bag">
+
+            <span>4</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="header-bottom">
+        <div class="header-bottom-menu">
+          <nav>
+            <ul>
+              <li *ngFor="let category of categories">
+                <a>{{ category.name }}</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="header-bottom-search">
+          <input type="text" placeholder="Начните искать">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
