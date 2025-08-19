@@ -1,1 +1,94 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div class="container">
+    <a class="logo">
+      <img src="/assets/images/logo-green.png" alt="Logo">
+    </a>
+
+    <div class="footer-block footer-menu">
+      <div class="footer-head">МЕНЮ</div>
+
+      <nav class="footer-items">
+        <ul>
+          <li>
+            <a>Главная</a>
+          </li>
+
+          <li>
+            <a>Каталог</a>
+          </li>
+
+          <li>
+            <a>Доставка и оплата</a>
+          </li>
+
+          <li>
+            <a>Новости</a>
+          </li>
+
+          <li>
+            <a>Отзывы</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-block footer-categories">
+      <div class="footer-head">КАТЕГОРИИ</div>
+
+      <nav class="footer-items">
+        <ul>
+          <li *ngFor="let category of categories">
+            <a>{{ category.name }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-block footer-info">
+      <div class="footer-head">МЫ В СОЦИАЛЬНЫХ СЕТЯХ</div>
+
+      <div class="footer-social">
+        <a>
+          <img src="/assets/images/socials/vk-com.svg" alt="vkcom">
+        </a>
+        <a>
+          <img src="/assets/images/socials/facebook.svg" alt="facebook">
+        </a>
+        <a>
+          <img src="/assets/images/socials/instagram.svg" alt="insta">
+        </a>
+      </div>
+
+      <div class="footer-payment">
+        <div class="payment-item" style="background-image: url('/assets/images/card-payments/card-1.png')">&nbsp;</div>
+        <div class="payment-item" style="background-image: url('/assets/images/card-payments/card-2.png')">&nbsp;</div>
+        <div class="payment-item" style="background-image: url('/assets/images/card-payments/card-3.png')">&nbsp;</div>
+        <div class="payment-item" style="background-image: url('/assets/images/card-payments/card-4.png')">&nbsp;</div>
+        <div class="payment-item" style="background-image: url('/assets/images/card-payments/card-5.png')">&nbsp;</div>
+        <div class="payment-item" style="background-image: url('/assets/images/card-payments/card-6.png')">&nbsp;</div>
+      </div>
+    </div>
+
+    <div class="footer-block footer-contacts">
+      <div class="footer-head">КОНТАКТЫ</div>
+
+      <div class="footer-contact">
+        <div class="footer-contact-head">Адрес</div>
+
+        <div class="footer-contact-info">г. Минск,  ул. Калиновского 61, подъезд 1, офис 6</div>
+      </div>
+
+      <div class="footer-contact">
+        <div class="footer-contact-head">Телефон</div>
+
+        <div class="footer-contact-info">+ 375 (29) 922-29-99</div>
+      </div>
+
+      <div class="footer-contact">
+        <div class="footer-contact-head">E-mail</div>
+
+        <div class="footer-contact-info">homedecor@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</footer>

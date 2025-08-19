@@ -35,12 +35,12 @@
               border-bottom: 1px solid transparent;
 
               &.active {
-                border-bottom-color: $base-text-color;
+                border-bottom-color: $green-text-color;
               }
 
               a {
                 font-size: 16px;
-                color: $base-text-color;
+                color: $green-text-color;
                 cursor: pointer;
                 text-decoration: none;
               }
@@ -50,7 +50,7 @@
 
         &-phone {
           font-size: 16px;
-          color: $base-text-color;
+          color: $green-text-color;
           text-decoration: none;
           margin-right: 59px;
         }
@@ -79,7 +79,7 @@
               font-family: 'Montserrat', sans-serif;
               font-weight: 400;
               font-size: 9px;
-              color: $base-text-color;
+              color: $green-text-color;
               border-radius: 50%;
               background-color: #B6D5B9;
             }
@@ -106,7 +106,7 @@
               border-bottom: 1px solid transparent;
 
               &.active {
-                border-bottom-color: $base-text-color;
+                border-bottom-color: $green-text-color;
               }
             }
 
@@ -130,7 +130,7 @@
             height: 41px;
             box-sizing: border-box;
             font-size: 16px;
-            color: $base-text-color;
+            color: $green-text-color;
             outline: none;
 
 
