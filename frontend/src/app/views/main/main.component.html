@@ -1,1 +1,46 @@
-<p>main works!</p>
+<section class="main">
+  <div class="container">
+    <div class="main-title">Создадим сад<br>в вашем доме и офисе</div>
+
+    <div class="main-text">
+      Если в большом городе вы скучаете по природе, ничто не мешает вам превратить в оазис квартиру или офис. И мы
+      поможем вам это сделать!
+    </div>
+  </div>
+</section>
+
+<section class="offers">
+  <div class="container">
+    <div class="offer offer-insta">
+      <div class="offer-title">Получи скидку 10% в нашем инстаграме!</div>
+
+      <div class="offer-content">
+        <div class="offer-image">
+          <img src="/assets/images/page/main/offer-1.png" alt="flowers">
+        </div>
+
+        <div class="offer-inner-content">
+          <div class="offer-text">Подпишись на наш аккаунт и напиши в direct “хочу промокод”</div>
+
+          <div class="offer-button">
+            <a [routerLink]="'https://vk.com/'" class="button">Получить промокод</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offer offer-collection">
+      <div class="offer-title">Новая коллекция керамических кашпо в наличии</div>
+
+      <div class="offer-content">
+        <div class="offer-image">
+          <img src="/assets/images/page/main/offer-2.png" alt="flowers">
+        </div>
+
+        <div class="offer-button">
+          <a [routerLink]="'/catalog'" class="button">В каталог</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,104 @@
+@import "../../../assets/styles/variables";
+
+
+.main {
+  background-image: url('/assets/images/page/main/main-bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: calc(50% + 210px);
+  padding: 58px 0 231px 0;
+
+  .container {
+
+    .main-title {
+      font-family: 'Lora', sans-serif;
+      font-weight: 400;
+      font-size: 60px;
+      line-height: 130%;
+      color: #2A592E;
+      margin-bottom: 67px;
+    }
+
+    .main-text {
+      font-size: 18px;
+      line-height: 140%;
+      color: $green-text-color;
+      max-width: 528px;
+    }
+  }
+}
+
+.offers {
+  background-color: #A4CBA3;
+  padding: 80px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .offer {
+      width: 600px;
+      height: 250px;
+      padding: 35px 35px 0 35px;
+      border-radius: 5px;
+      background-color: #FFFFFF;
+      box-sizing: border-box;
+
+      &-title {
+        font-size: 20px;
+        line-height: 130%;
+        color: $green-text-color;
+      }
+
+      &-content {
+        display: flex;
+
+        .offer-text {
+          font-size: 16px;
+          line-height: 130%;
+          color: $green-text-color;
+        }
+      }
+
+      &.offer-insta {
+
+        .offer-image {
+          margin-top: 35px;
+        }
+
+        .offer-text {
+          margin-top: 16px;
+          max-width: 234px;
+          margin-left: 58px;
+        }
+
+        .offer-button {
+          margin: 22px 0 0 168px;
+
+          .button {
+            width: 228px;
+          }
+        }
+      }
+
+      &.offer-collection {
+
+        .offer-title {
+          max-width: 362px;
+        }
+
+        .offer-image {
+          margin: 12px 0 0 81px;
+        }
+
+        .offer-button {
+          margin: 75px 0 0 44px;
+
+          .button {
+            width: 177px;
+          }
+        }
+      }
+    }
+  }
+}
