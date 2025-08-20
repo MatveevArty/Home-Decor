@@ -52,6 +52,18 @@ export class AuthService {
   }
 
   /**
+   * Запрос на регистрацию в системе
+   * @param email Почта
+   * @param password Пароль
+   * @param passwordRepeat Повторение пароля
+   */
+  public signup(email: string, password: string, passwordRepeat: string):Observable<LoginResponseType | DefaultResponseType> {
+    return this.http.post<LoginResponseType | DefaultResponseType>(environment.api + 'signup', {
+      email, password, passwordRepeat
+    });
+  }
+
+  /**
    * Запрос на выход из системы
    */
   public logout():Observable<DefaultResponseType> {
