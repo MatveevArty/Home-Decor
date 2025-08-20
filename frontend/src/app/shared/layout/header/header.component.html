@@ -30,9 +30,21 @@
         </a>
 
         <div class="header-top-actions">
-          <a>
-            <img [routerLink]="'/login'" src="/assets/images/icons/login.svg" alt="login">
+          <a [routerLink]="'/login'" *ngIf="!isLoggedIn">
+            <img src="/assets/images/icons/login.svg" alt="login">
           </a>
+
+          <a *ngIf="isLoggedIn" [matMenuTriggerFor]="menu">
+            <img src="/assets/images/icons/profile.svg" alt="profile">
+          </a>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <a [routerLink]="'/profile'">Профиль</a>
+            </button>
+            <button mat-menu-item>
+              <span (click)="logout()">Выйти</span>
+            </button>
+          </mat-menu>
 
           <a>
             <img src="/assets/images/icons/heart.svg" alt="heart">
