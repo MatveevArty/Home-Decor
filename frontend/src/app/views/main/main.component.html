@@ -44,3 +44,29 @@
     </div>
   </div>
 </section>
+
+<section class="best-products">
+  <div class="container">
+    <div class="carousel-header">
+      <div class="carousel-title">Лучшие предложения месяца</div>
+
+      <div class="carousel-arrows">
+        <a class="move-backwards" (click)="owlCar.prev()">
+          <img src="/assets/images/icons/arrow-left.svg" alt="Назад">
+        </a>
+
+        <a class="move-forward" (click)="owlCar.next()">
+          <img src="/assets/images/icons/arrow-right.svg" alt="Вперёд">
+        </a>
+      </div>
+    </div>
+
+    <div class="carousel-items">
+      <owl-carousel-o [options]="customOptions" #owlCar>
+        <ng-template carouselSlide *ngFor="let product of products">
+          <app-product-card [product]="product"></app-product-card>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
