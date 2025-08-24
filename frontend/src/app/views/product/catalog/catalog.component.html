@@ -1,0 +1,99 @@
+<div class="catalog">
+  <div class="container">
+    <div class="catalog-title">Каталог</div>
+
+    <div class="catalog-head">
+      <div class="catalog-head__filters">
+        <div class="catalog-head__filter">
+          <span>Суккуленты</span>
+          <a>
+            <img src="/assets/images/icons/closing-cross.svg" alt="Крестик">
+          </a>
+        </div>
+
+      </div>
+
+      <div class="catalog-head__sorting">
+        <span>Сортировать</span>
+
+        <img src="/assets/images/icons/arrow-down.svg" alt="Развернуть">
+      </div>
+    </div>
+
+    <div class="catalog-layout">
+      <div class="catalog-filters">
+        <div class="catalog-filter open">
+          <div class="catalog-filter-head">
+            <span>Комнатные растения</span>
+
+            <img src="/assets/images/icons/arrow-up.svg" alt="Развернуть">
+          </div>
+
+          <div class="catalog-filter-body">
+            <label class="catalog-filter-checkbox">
+              <input type="checkbox">
+              <span>Кактусы</span>
+            </label>
+
+            <label class="catalog-filter-checkbox">
+              <input type="checkbox">
+              <span>Суккуленты</span>
+            </label>
+
+            <label class="catalog-filter-checkbox">
+              <input type="checkbox">
+              <span>Эхеверии</span>
+            </label>
+
+            <label class="catalog-filter-checkbox">
+              <input type="checkbox">
+              <span>Цветущие комнатные растения</span>
+            </label>
+
+            <label class="catalog-filter-checkbox">
+              <input type="checkbox">
+              <span>Пальмы домашние</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="catalog-filter">
+          <div class="catalog-filter-head">
+            <span>Флорариумы</span>
+
+            <img src="/assets/images/icons/arrow-up.svg" alt="Развернуть">
+          </div>
+
+          <div class="catalog-filter-body">
+            <label class="catalog-filter-checkbox">
+              <input type="checkbox">
+              <span>Кактусы</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="catalog-filter open">
+          <div class="catalog-filter-head">
+            <span>Высота</span>
+
+            <img src="/assets/images/icons/arrow-up.svg" alt="Развернуть">
+          </div>
+
+          <div class="catalog-filter-body">
+            <div class="catalog-filter-from-to">
+              <span>от</span>
+              <input type="number" min="0" step="1" value="1" class="small-input">
+              <span>до</span>
+              <input type="number" min="0" step="1" value="2" class="small-input">
+              <span>cм</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-products">
+        <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

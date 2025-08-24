@@ -11,8 +11,17 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-
+  /**
+   * Запрос на получение лучших продуктов
+   */
   public getBestProducts(): Observable<ProductType[]> {
     return this.http.get<ProductType[]>(environment.api + 'products/best')
+  }
+
+  /**
+   * Запрос на получение продуктов
+   */
+  public getProducts(): Observable<{totalCount: number, pages: number, items: ProductType[]}> {
+    return this.http.get<{totalCount: number, pages: number, items: ProductType[]}>(environment.api + 'products')
   }
 }
