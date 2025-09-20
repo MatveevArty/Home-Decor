@@ -4,9 +4,9 @@
 
     <div class="catalog-head">
       <div class="catalog-head__filters">
-        <div class="catalog-head__filter">
-          <span>Суккуленты</span>
-          <a>
+        <div class="catalog-head__filter" *ngFor="let appliedFilter of appliedFilters">
+          <span>{{ appliedFilter.name }}</span>
+          <a (click)="removeAppliedFilter(appliedFilter)">
             <img src="/assets/images/icons/closing-cross.svg" alt="Крестик">
           </a>
         </div>

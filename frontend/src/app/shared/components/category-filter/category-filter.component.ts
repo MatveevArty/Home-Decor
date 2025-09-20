@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CategoryWithTypeType} from "../../../../types/category-with-type.type";
 import {ActiveParamsType} from "../../../../types/active-params.type";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ActiveParamsUtil} from "../../utils/active-params.util";
 
 @Component({
   selector: 'app-category-filter',
@@ -23,8 +24,14 @@ export class CategoryFilterComponent implements OnInit {
    */
   public activeParams: ActiveParamsType = { types: [] };
 
+  /**
+   * Значение инпута От
+   */
   public from: number | null = null;
 
+  /**
+   * Значение инпута До
+   */
   public to: number | null = null;
 
   /**
@@ -51,37 +58,7 @@ export class CategoryFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
-      const activeParams: ActiveParamsType = { types: [] };
-
-      if (params.hasOwnProperty('types')) {
-        activeParams.types = Array.isArray(params['types']) ? params['types'] : [params['types']];
-      }
-
-      if (params.hasOwnProperty('heightFrom')) {
-        activeParams.heightFrom = params['heightFrom'];
-      }
-
-      if (params.hasOwnProperty('heightTo')) {
-        activeParams.heightTo = params['heightTo'];
-      }
-
-      if (params.hasOwnProperty('diameterFrom')) {
-        activeParams.diameterFrom = params['diameterFrom'];
-      }
-
-      if (params.hasOwnProperty('diameterTo')) {
-        activeParams.diameterTo = params['diameterTo'];
-      }
-
-      if (params.hasOwnProperty('sort')) {
-        activeParams.sort = params['sort'];
-      }
-
-      if (params.hasOwnProperty('page')) {
-        activeParams.page = Number(params['page']);
-      }
-
-      this.activeParams = activeParams;
+      this.activeParams = ActiveParamsUtil.processParams(params);
 
       if (this.type) {
         if (this.type === 'height') {
@@ -94,7 +71,6 @@ export class CategoryFilterComponent implements OnInit {
           this.to = this.activeParams.diameterTo ? Number(this.activeParams.diameterTo) : null;
         }
       } else {
-        this.activeParams.types = []
         if (params['types']) {
           this.activeParams.types = Array.isArray(params['types']) ? params['types'] : [params['types']];
         }
@@ -142,6 +118,11 @@ export class CategoryFilterComponent implements OnInit {
     });
   }
 
+  /**
+   * Обработка инпутов с высотой и диаметром
+   * @param param тип инпута из четырёх
+   * @param value введённое числовое значение
+   */
   public updateFilterParamFromTo(param: string, value: string) {
     if (param === 'heightFrom' || param === 'heightTo' || param === 'diameterFrom' || param === 'diameterTo') {
       if (this.activeParams[param] && !value) {
