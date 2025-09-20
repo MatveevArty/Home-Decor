@@ -1,0 +1,23 @@
+<div class="catalog-filter open" [class.open]="open">
+  <div class="catalog-filter-head" (click)="toggle()">
+    <span>{{ title }}</span>
+
+    <img *ngIf="open" src="/assets/images/icons/arrow-up.svg" alt="Развернуть">
+    <img *ngIf="!open" src="/assets/images/icons/arrow-down.svg" alt="Свернуть">
+  </div>
+
+  <div class="catalog-filter-body">
+    <label class="catalog-filter-checkbox" *ngFor="let type of categoryWithTypes?.types">
+      <input type="checkbox" #inputCheckbox (change)="updateFilterParam(type.url, inputCheckbox.checked)">
+      <span>{{ type.name }}</span>
+    </label>
+
+    <div class="catalog-filter-from-to" *ngIf="type">
+      <span>от</span>
+      <input type="number" min="0" step="1" class="small-input">
+      <span>до</span>
+      <input type="number" min="0" step="1" class="small-input">
+      <span>cм</span>
+    </div>
+  </div>
+</div>
