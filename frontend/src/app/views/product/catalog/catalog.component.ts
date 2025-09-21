@@ -35,6 +35,26 @@ export class CatalogComponent implements OnInit {
    */
   public appliedFilters: AppliedFilterType[] = [];
 
+  /**
+   * Флаг открытости кнопки Сортировка
+   */
+  public sortingOpen: boolean = false;
+
+  /**
+   * Список параметров сортировки для кнопки Сортировка
+   */
+  public sortingOptions: { name: string, value: string }[] = [
+    { name: 'От А до Я', value: 'az-asc' },
+    { name: 'От Я до А', value: 'az-desc' },
+    { name: 'По возрастанию цены', value: 'price-asc' },
+    { name: 'По убыванию цены', value: 'price-desc' },
+  ];
+
+  /**
+   * Массив страниц
+   */
+  public pages: number[] = [];
+
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
               private activatedRoute: ActivatedRoute,
@@ -89,14 +109,19 @@ export class CatalogComponent implements OnInit {
             urlParam: 'diameterTo',
           });
         }
+
+        this.productService.getProducts(this.activeParams).subscribe(
+          data => {
+            this.pages = [];
+            for (let i = 1; i <= data.pages; i++) {
+              this.pages.push(i);
+            }
+
+            this.products = data.items;
+          }
+        );
       })
     });
-
-    this.productService.getProducts().subscribe(
-      data => {
-        this.products = data.items;
-      }
-    );
   }
 
   /**
@@ -111,9 +136,68 @@ export class CatalogComponent implements OnInit {
       this.activeParams.types = this.activeParams.types.filter((type) => type !== appliedFilter.urlParam);
     }
 
+    this.activeParams.page = 1;
+
     this.router.navigate(['/catalog'], {
       queryParams: this.activeParams,
     });
+  }
+
+  /**
+   * Обработка клика по кнопке Сортировка
+   */
+  public toggleSorting() {
+    this.sortingOpen = !this.sortingOpen;
+  }
+
+  /**
+   * Сортировка при клике на вариант сортировки
+   * @param value вариант сортировки
+   */
+  public sort(value: string) {
+    this.activeParams.sort = value;
+
+    this.router.navigate(['/catalog'], {
+      queryParams: this.activeParams,
+    });
+  }
+
+  /**
+   * Переход на предыдущую страницу в пагинации
+   */
+  public openPrevPage(): void {
+    if (this.activeParams.page && this.activeParams.page > 1) {
+      this.activeParams.page--;
+
+      this.router.navigate(['/catalog'], {
+        queryParams: this.activeParams,
+      });
+    }
+  }
+
+  /**
+   * Переход на указанную страницу в пагинации
+   * @param page
+   */
+  public openPage(page: number): void {
+    this.activeParams.page = page;
+
+    this.router.navigate(['/catalog'], {
+      queryParams: this.activeParams,
+    });
+  }
+
+  /**
+   * Переход на следующую страницу в пагинации
+   */
+  public openNextPage(): void {
+    if (this.activeParams.page && this.activeParams.page < this.pages.length) {
+      this.activeParams.page++;
+
+      this.router.navigate(['/catalog'], {
+        queryParams: this.activeParams,
+      });
+    }
   }
 
 }

@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryType} from "../../../../types/category.type";
 import {AuthService} from "../../../core/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {CategoryWithTypeType} from "../../../../types/category-with-type.type";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
    */
   public isLoggedIn: boolean = false;
 
-  @Input() categories: CategoryType[] = [];
+  @Input() categories: CategoryWithTypeType[] = [];
 
   constructor(private authService: AuthService,
               private _snackBar: MatSnackBar,

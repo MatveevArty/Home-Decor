@@ -112,6 +112,7 @@ export class CategoryFilterComponent implements OnInit {
       this.activeParams.types = [url];
     }
 
+    this.activeParams.page = 1;
 
     this.router.navigate(['/catalog'], {
       queryParams: this.activeParams,
@@ -130,6 +131,8 @@ export class CategoryFilterComponent implements OnInit {
       } else {
         this.activeParams[param] = Number(value);
       }
+
+      this.activeParams.page = 1;
 
       this.router.navigate(['/catalog'], {
         queryParams: this.activeParams,

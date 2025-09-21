@@ -13,7 +13,7 @@
 
       </div>
 
-      <div class="catalog-head__sorting open">
+      <div class="catalog-head__sorting" [class.open]="sortingOpen" (click)="toggleSorting()">
         <div class="sorting-head">
           <span>Сортировать</span>
 
@@ -21,10 +21,10 @@
         </div>
 
         <div class="sorting-body">
-          <div class="sorting-body__item">От А до Я</div>
-          <div class="sorting-body__item">От Я до А</div>
-          <div class="sorting-body__item active">По возрастанию цены</div>
-          <div class="sorting-body__item">По убыванию цены</div>
+          <div class="sorting-body__item"
+               [class.active]="this.activeParams.sort ? this.activeParams.sort === sortingOption.value : false"
+               (click)="sort(sortingOption.value)"
+               *ngFor="let sortingOption of sortingOptions">{{ sortingOption.name }}</div>
         </div>
       </div>
     </div>
@@ -43,20 +43,20 @@
       </div>
     </div>
 
-    <div class="pagination">
-      <div class="pagination-arrow disabled">
+    <div class="pagination" *ngIf="pages.length > 1">
+      <div class="pagination-arrow" (click)="openPrevPage()"
+           [class.disabled]="this.activeParams.page ? this.activeParams.page === 1: true">
         <img src="/assets/images/icons/pag-arrow-left.svg" alt="Назад">
       </div>
 
       <div class="pagination-pages">
-        <a class="pagination-page active">1</a>
-        <a class="pagination-page">2</a>
-        <a class="pagination-page">3</a>
-        <a class="pagination-page">4</a>
-        <a class="pagination-page">5</a>
+        <a class="pagination-page" (click)="openPage(page)"
+           [class.active]="this.activeParams.page ? this.activeParams.page === page : (page === 1)"
+           *ngFor="let page of pages">{{ page }}</a>
       </div>
 
-      <div class="pagination-arrow">
+      <div class="pagination-arrow" (click)="openNextPage()"
+           [class.disabled]="this.activeParams.page ? this.activeParams.page === pages.length : false">
         <img src="/assets/images/icons/pag-arrow-right.svg" alt="Вперёд">
       </div>
     </div>
