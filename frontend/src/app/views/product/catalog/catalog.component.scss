@@ -1,13 +1,11 @@
 @import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
 
 .catalog {
   padding: 100px 0 110px 0;
 
   &-title {
-    font-family: 'Lora', sans-serif;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 130%;
+    @include head-lora-36;
     color: $green-text-color;
     margin: 0 0 33px 317px;
   }

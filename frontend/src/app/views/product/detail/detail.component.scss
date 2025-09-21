@@ -1,0 +1,118 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.detail {
+  padding: 101px 0 110px 0;
+
+  &-title {
+    @include head-lora-36;
+  }
+
+  &-product {
+    margin: 30px 0 120px 0;
+    display: flex;
+    justify-content: space-between;
+
+    .detail-image {
+      width: 528px;
+      height: 528px;
+      background-size: cover;
+      border-radius: 16px;
+    }
+
+    .detail-info {
+      width: 602px;
+
+      &-items {
+        margin-bottom: 51px;
+
+        .detail-info-item {
+          padding-top: 20px;
+          margin-top: 20px;
+          border-top: 1px solid #E7F1E8;
+          display: flex;
+
+          &:first-child {
+            padding-top: unset;
+            margin-top: unset;
+            border-top: unset;
+          }
+
+          &-text {
+            margin-left: 22px;
+            width: 528px;
+
+            .detail-info-item-title {
+              font-family: 'Montserrat', sans-serif;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 20px;
+              color: $green-text-color;
+              margin-bottom: 15px;
+            }
+
+            .detail-info-item-description {
+              font-size: 16px;
+              line-height: 130%;
+              color: $gray-text-color;
+            }
+          }
+        }
+      }
+
+      .detail-info-param {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        margin-top: 12px;
+
+        &-name {
+          font-weight: 500;
+          margin-right: 10px;
+        }
+      }
+
+      .detail-info-params {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &-count {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-weight: 500;
+            font-size: 16px;
+            margin-right: 20px;
+          }
+        }
+
+        &-price {
+          font-weight: 700;
+          font-size: 40px;
+          color: #313131;
+        }
+      }
+
+      .detail-info-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 22px;
+
+        .button {
+          width: 290px;
+
+          &.button-transparent {
+            width: 307px;
+          }
+        }
+      }
+    }
+  }
+
+  .recommended-products {
+
+  }
+}
