@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
 import {ProductService} from "../../../shared/services/product.service";
 import {ProductType} from "../../../../types/product.type";
+import {ActivatedRoute} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-detail',
@@ -14,6 +16,11 @@ export class DetailComponent implements OnInit {
    * Рекомендованные товары, получаемые с бэкенда
    */
   public recommendedProducts: ProductType[] = [];
+
+  /**
+   * Текущий продукт
+   */
+  public product!: ProductType;
 
   /**
    * Настройки для owl-карусели с товарами
@@ -43,9 +50,22 @@ export class DetailComponent implements OnInit {
     },
   }
 
-  constructor(private productService: ProductService,) { }
+  /**
+   * Статичный путь до папки assets с картинками
+   */
+  public serverStaticPath = environment.serverStaticPath;
+
+  constructor(private productService: ProductService,
+              private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      this.productService.getProduct(params['url']).subscribe(
+        (data: ProductType) => {
+          this.product = data;
+        })
+    })
+
     this.productService.getBestProducts().subscribe(
       (data: ProductType[]) => {
         this.recommendedProducts = data;

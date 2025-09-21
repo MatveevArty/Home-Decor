@@ -27,4 +27,11 @@ export class ProductService {
       params: activeParams
     })
   }
+
+  /**
+   * Запрос на получение конкретного продукта
+   */
+  public getProduct(url: string): Observable<ProductType> {
+    return this.http.get<ProductType>(environment.api + 'products/' + url)
+  }
 }
