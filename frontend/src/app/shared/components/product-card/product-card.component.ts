@@ -11,9 +11,17 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product!: ProductType;
 
+  /**
+   * Путь до папки с картинками на бэкенде
+   */
   public serverStaticPath = environment.serverStaticPath;
 
+  /**
+   * Счётчик количества данного товара
+   */
   public count: number = 1;
+
+  @Input() isLight: boolean = false;
 
   constructor() { }
 
