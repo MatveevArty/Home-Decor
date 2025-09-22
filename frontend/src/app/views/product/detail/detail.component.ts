@@ -13,6 +13,11 @@ import {environment} from "../../../../environments/environment";
 export class DetailComponent implements OnInit {
 
   /**
+   * Счётчик количества данного товара
+   */
+  public count: number = 5;
+
+  /**
    * Рекомендованные товары, получаемые с бэкенда
    */
   public recommendedProducts: ProductType[] = [];
@@ -72,6 +77,19 @@ export class DetailComponent implements OnInit {
       })
   }
 
+  /**
+   * Обновление счётчика количества данного товара
+   * @param value счётчик количества
+   */
+  public updateCount(value: number) {
+    this.count = value;
+  }
 
+  /**
+   * Добавление в корзину установленного количества данного товара
+   */
+  public addToCart(): void {
+    alert('Добавлено в корзину следующее количество тданного товара: ' + this.count);
+  }
 
 }

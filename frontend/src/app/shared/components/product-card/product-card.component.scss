@@ -58,20 +58,6 @@
     align-items: center;
     justify-content: space-between;
 
-    .product-card__count {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 97px;
-
-      div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-      }
-    }
-
     .product-card__detail {
       display: flex;
       align-items: center;

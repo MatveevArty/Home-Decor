@@ -1,0 +1,11 @@
+<div class="count-selector">
+  <div (click)="decreaseCount()">
+    <img src="/assets/images/icons/minus.svg" alt="Минус">
+  </div>
+
+  <input type="text" class="small-input" [(ngModel)]="count" (change)="countChange()">
+
+  <div (click)="increaseCount()">
+    <img src="/assets/images/icons/plus.svg" alt="Плюс">
+  </div>
+</div>
