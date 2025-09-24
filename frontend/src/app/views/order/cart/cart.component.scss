@@ -8,6 +8,19 @@
     @include head-lora-36;
   }
 
+  &-empty {
+    margin: 20px 0 100px 0;
+
+    div {
+      font-size: 16px;
+    }
+
+    .button {
+      width: 255px;
+      margin-top: 10px;
+    }
+  }
+
   &-info {
     display: flex;
     justify-content: space-between;

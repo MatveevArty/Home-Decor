@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
 import {ProductType} from "../../../../types/product.type";
 import {ProductService} from "../../../shared/services/product.service";
+import {CartService} from "../../../shared/services/cart.service";
+import {CartType} from "../../../../types/cart.type";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +12,26 @@ import {ProductService} from "../../../shared/services/product.service";
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+
+  /**
+   * Статичный путь до папки assets с картинками
+   */
+  public serverStaticPath = environment.serverStaticPath;
+
+  /**
+   * Корзина товаров
+   */
+  public cart: CartType | null = null;
+
+  /**
+   * Общая стоимость всехх товаров
+   */
+  public totalAmount: number = 0;
+
+  /**
+   * Общее количество всех товаров
+   */
+  public totalCount: number = 0;
 
   /**
    * Продукты
@@ -43,13 +66,33 @@ export class CartComponent implements OnInit {
     },
   }
 
-  constructor(private productService: ProductService,) { }
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,) { }
 
   ngOnInit(): void {
     this.productService.getBestProducts().subscribe(
       (data: ProductType[]) => {
         this.extraProducts = data;
+      });
+
+    this.cartService.getCart().subscribe(
+      (data: CartType) => {
+        this.cart = data;
+        this.calculateTotal();
+      });
+  }
+
+  public calculateTotal() {
+    this.totalAmount = 0;
+    this.totalCount = 0;
+
+    if (this.cart) {
+      this.cart.items.forEach(item => {
+        this.totalAmount = this.totalCount + item.quantity * item.product.price;
+        this.totalCount = this.totalCount + item.quantity;
       })
+    }
   }
 
 }

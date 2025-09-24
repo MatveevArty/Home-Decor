@@ -1,45 +1,23 @@
-<div class="cart">
+<div class="cart" *ngIf="cart">
   <div class="container">
     <div class="cart-title">Корзина</div>
 
-    <div class="cart-info">
+    <div class="cart-empty" *ngIf="!this.cart || this.cart.items.length === 0">
+      <div>В корзине нет товаров</div>
+
+      <button [routerLink]="'/catalog'" class="button">В каталог</button>
+    </div>
+
+    <div class="cart-info" *ngIf="this.cart && this.cart.items.length > 0">
       <div class="cart-products">
-        <div class="cart-product">
-          <div class="cart-product-image"></div>
+        <div class="cart-product" *ngFor="let cartProduct of cart.items">
+          <div class="cart-product-image" style="background-image: url({{ this.serverStaticPath + cartProduct.product.image }})"></div>
 
-          <div class="cart-product-name">Сансевиерия трехпучковая Муншайн</div>
+          <div class="cart-product-name">{{ cartProduct.product.name }}</div>
 
-          <app-count-selector></app-count-selector>
+          <app-count-selector [count]="cartProduct.quantity"></app-count-selector>
 
-          <div class="cart-product-price">100 BYN</div>
-
-          <div class="cart-product-remove">
-            <img src="assets/images/icons/closing-cross.svg" alt="Крестик">
-          </div>
-        </div>
-
-        <div class="cart-product">
-          <div class="cart-product-image"></div>
-
-          <div class="cart-product-name">Сансевиерия трехпучковая Муншайн</div>
-
-          <app-count-selector></app-count-selector>
-
-          <div class="cart-product-price">100 BYN</div>
-
-          <div class="cart-product-remove">
-            <img src="assets/images/icons/closing-cross.svg" alt="Крестик">
-          </div>
-        </div>
-
-        <div class="cart-product">
-          <div class="cart-product-image"></div>
-
-          <div class="cart-product-name">Сансевиерия трехпучковая Муншайн</div>
-
-          <app-count-selector></app-count-selector>
-
-          <div class="cart-product-price">100 BYN</div>
+          <div class="cart-product-price">{{ cartProduct.product.price }} BYN</div>
 
           <div class="cart-product-remove">
             <img src="assets/images/icons/closing-cross.svg" alt="Крестик">
@@ -53,12 +31,12 @@
 
           <div class="cart-details-info-item first">
             <div class="cart-details-info-item-text">Товаров:</div>
-            <div class="cart-details-info-item-data">4</div>
+            <div class="cart-details-info-item-data">{{ this.totalCount }}</div>
           </div>
 
           <div class="cart-details-info-item">
             <div class="cart-details-info-item-text">Общая стоимость:</div>
-            <div class="cart-details-info-item-data">147 BYN</div>
+            <div class="cart-details-info-item-data">{{ this.totalAmount }} BYN</div>
           </div>
 
           <div class="cart-details-info-delivery">* без учета доставки</div>
