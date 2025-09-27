@@ -3,6 +3,7 @@ import {AuthService} from "../../../core/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {CategoryWithTypeType} from "../../../../types/category-with-type.type";
+import {CartService} from "../../services/cart.service";
 
 
 @Component({
@@ -11,6 +12,8 @@ import {CategoryWithTypeType} from "../../../../types/category-with-type.type";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  public count: number = 0;
 
   /**
    * Флаг факта логина пользователем
@@ -21,7 +24,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private _snackBar: MatSnackBar,
-              private router: Router,) {
+              private router: Router,
+              private cartService: CartService,) {
     this.isLoggedIn = this.authService.getIsLoggedIn();
   }
 
@@ -29,6 +33,17 @@ export class HeaderComponent implements OnInit {
     this.authService.isLoggedSubject.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn;
     })
+
+    this.cartService.getCartCount()
+      .subscribe((data: { count: number }) => {
+        this.count = data.count;
+        this.cartService.count = data.count;
+      });
+
+    this.cartService.count$
+      .subscribe((count: number) => {
+        this.count = count;
+      })
   }
 
   /**
