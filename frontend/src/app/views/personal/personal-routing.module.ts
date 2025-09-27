@@ -5,9 +5,9 @@ import {OrdersComponent} from "./orders/orders.component";
 import {InfoComponent} from "./info/info.component";
 
 const routes: Routes = [
-  { path: '/favorite', component: FavoriteComponent },
-  { path: '/orders', component: OrdersComponent },
-  { path: '/info', component: InfoComponent },
+  { path: 'favorite', component: FavoriteComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: 'info', component: InfoComponent },
 ];
 
 @NgModule({
