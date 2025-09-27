@@ -15,6 +15,15 @@ export class CartService {
    * Запрос на получение конкретного продукта
    */
   public getCart(): Observable<CartType> {
-    return this.http.get<CartType>(environment.api + 'cart')
+    return this.http.get<CartType>(environment.api + 'cart', { withCredentials: true })
+  }
+
+  /**
+   * Запрос на добавление конкретного продукта в корзину
+   * @param productId айди продукта
+   * @param quantity количество данного продукта
+   */
+  public updateCart(productId: string, quantity: number): Observable<CartType> {
+    return this.http.post<CartType>(environment.api + 'cart', { productId, quantity }, { withCredentials: true })
   }
 }

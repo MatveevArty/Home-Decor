@@ -83,6 +83,9 @@ export class CartComponent implements OnInit {
       });
   }
 
+  /**
+   * Пересчёт общей суммы заказа
+   */
   public calculateTotal() {
     this.totalAmount = 0;
     this.totalCount = 0;
@@ -91,6 +94,21 @@ export class CartComponent implements OnInit {
       this.cart.items.forEach(item => {
         this.totalAmount = this.totalCount + item.quantity * item.product.price;
         this.totalCount = this.totalCount + item.quantity;
+      })
+    }
+  }
+
+  /**
+   * Обновление счётчика количества данного товара
+   * @param id айди товара
+   * @param count счётчик количества
+   */
+  public updateCount(id: string, count: number) {
+    if (this.cart) {
+      this.cartService.updateCart(id, count)
+        .subscribe((data: CartType) => {
+        this.cart = data;
+        this.calculateTotal();
       })
     }
   }

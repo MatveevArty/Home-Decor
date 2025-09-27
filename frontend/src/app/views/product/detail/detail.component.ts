@@ -4,6 +4,8 @@ import {ProductService} from "../../../shared/services/product.service";
 import {ProductType} from "../../../../types/product.type";
 import {ActivatedRoute} from "@angular/router";
 import {environment} from "../../../../environments/environment";
+import {CartType} from "../../../../types/cart.type";
+import {CartService} from "../../../shared/services/cart.service";
 
 @Component({
   selector: 'app-detail',
@@ -61,13 +63,27 @@ export class DetailComponent implements OnInit {
   public serverStaticPath = environment.serverStaticPath;
 
   constructor(private productService: ProductService,
-              private activatedRoute: ActivatedRoute,) { }
+              private activatedRoute: ActivatedRoute,
+              private cartService: CartService,) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.productService.getProduct(params['url']).subscribe(
         (data: ProductType) => {
-          this.product = data;
+
+          this.cartService.getCart().subscribe((cartData: CartType) => {
+
+            if (cartData) {
+              const productInCart = cartData.items.find((item) => item.product.id === data.id);
+
+              if (productInCart) {
+                data.countInCart = productInCart.quantity;
+                this.count = data.countInCart;
+              }
+            }
+
+            this.product = data;
+          })
         })
     })
 
@@ -83,13 +99,33 @@ export class DetailComponent implements OnInit {
    */
   public updateCount(value: number) {
     this.count = value;
+
+    if (this.product.countInCart) {
+      this.cartService.updateCart(this.product.id, this.count)
+        .subscribe((data: CartType) => {
+          this.product.countInCart = this.count;
+        });
+    }
   }
 
   /**
    * Добавление в корзину установленного количества данного товара
    */
   public addToCart(): void {
-    alert('Добавлено в корзину следующее количество тданного товара: ' + this.count);
+    this.cartService.updateCart(this.product.id, this.count)
+      .subscribe((data: CartType) => {
+        this.product.countInCart = this.count;
+      });
   }
 
+  /**
+   * Удаление товара из корзины
+   */
+  public removeFromCart(): void {
+    this.cartService.updateCart(this.product.id, 0)
+      .subscribe((data: CartType) => {
+        this.product.countInCart = 0;
+        this.count = 1;
+      });
+  }
 }

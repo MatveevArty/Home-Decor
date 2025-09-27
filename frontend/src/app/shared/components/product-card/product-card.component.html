@@ -19,12 +19,16 @@
     <div class="product-card__price">{{ product.price }} BYN</div>
 
     <div class="product-card__action">
-      <button class="button">В корзину</button>
+      <button class="button" (click)="addToCart()" *ngIf="!countInCart">В корзину</button>
+      <button class="button button-transparent button-in-cart" (click)="removeFromCart()" *ngIf="countInCart">
+        <span>В корзине</span>
+        <span>Удалить</span>
+      </button>
     </div>
   </div>
 
   <div class="product-card__extra" *ngIf="!isLight">
-    <app-count-selector></app-count-selector>
+    <app-count-selector [count]="count" (onCountChange)="updateCount($event)"></app-count-selector>
 
     <a [routerLink]="'/product/' + product.url" class="product-card__detail">
       <img src="/assets/images/icons/three-dots-details.svg" alt="Точки">

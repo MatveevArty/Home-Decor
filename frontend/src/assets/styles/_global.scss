@@ -68,6 +68,28 @@ html, body {
     background-color: gray;
     cursor: not-allowed;
   }
+
+  &.button-in-cart span {
+    &:first-child {
+      display: block;
+    }
+
+    &:nth-child(2) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    &.button-in-cart span {
+      &:first-child {
+        display: none;
+      }
+
+      &:nth-child(2) {
+        display: block;
+      }
+    }
+  }
 }
 
 a.button {

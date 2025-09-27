@@ -69,7 +69,11 @@
             <span>В избранное</span>
           </button>
 
-          <button class="button" (click)="addToCart()">В корзину</button>
+          <button class="button" (click)="addToCart()" *ngIf="!this.product.countInCart">В корзину</button>
+          <button class="button button-transparent button-in-cart" (click)="removeFromCart()" *ngIf="this.product.countInCart">
+            <span>В корзине</span>
+            <span>Удалить</span>
+          </button>
         </div>
       </div>
     </div>
