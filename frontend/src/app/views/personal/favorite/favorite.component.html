@@ -3,15 +3,15 @@
     <div class="favorite-title">Избранное</div>
 
     <div class="favorite-products">
-      <div class="favorite-product">
-        <div class="favorite-product-image"></div>
+      <div class="favorite-product" *ngFor="let product of favoriteProducts">
+        <div class="favorite-product-image" style="background-image: url({{ this.serverStaticPath + product.image }})"></div>
 
-        <div class="favorite-product-name">Хавортия альба</div>
+        <div class="favorite-product-name">{{ product.name }}</div>
 
-        <div class="favorite-product-price">24 BYN</div>
+        <div class="favorite-product-price">{{ product.price }} BYN</div>
 
         <div class="favorite-product-action">
-          <button class="button">Открыть</button>
+          <button class="button" [routerLink]="'product/' + product.url">Открыть</button>
         </div>
 
         <div class="favorite-product-remove">

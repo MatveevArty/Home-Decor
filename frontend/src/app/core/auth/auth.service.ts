@@ -78,6 +78,20 @@ export class AuthService {
   }
 
   /**
+   * Запрос на рефреш токена
+   */
+  public refresh(): Observable<DefaultResponseType | LoginResponseType> {
+    const tokens = this.getTokens();
+
+    if (tokens && tokens.refreshToken) {
+      return this.http.post<DefaultResponseType>(environment.api + 'logout', {
+        refreshToken: tokens.refreshToken
+      });
+    }
+    throw throwError(() => 'Cannot refresh tokens');
+  }
+
+  /**
    * Получить флаг факта логина пользователем
    */
   public getIsLoggedIn() {
