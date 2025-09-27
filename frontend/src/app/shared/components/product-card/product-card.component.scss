@@ -16,6 +16,10 @@
     top: 12px;
     right: 12px;
     z-index: 2;
+
+    span {
+      cursor: pointer;
+    }
   }
 
   &__image {

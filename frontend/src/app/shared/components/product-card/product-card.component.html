@@ -1,12 +1,12 @@
 <div class="product-card"
      *ngIf="product" [routerLink]="isLight ? ['/product/' + product.url] : []"
      [class.is-light]="isLight">
-  <div class="product-card__favorite" *ngIf="!isLight">
-<!--    <span>-->
-<!--      <img src="/assets/images/icons/product-card-heart-untouched.svg" alt="heart-favorite">-->
-<!--    </span>-->
+  <div class="product-card__favorite" *ngIf="!isLight" (click)="updateFavorite()">
+    <span *ngIf="product.isInFavorite">
+      <img src="/assets/images/icons/product-card-heart-touched.svg" alt="heart-favorite">
+    </span>
 
-    <span>
+    <span *ngIf="!product.isInFavorite">
       <img src="/assets/images/icons/product-card-heart-untouched.svg" alt="heart-favorite">
     </span>
   </div>

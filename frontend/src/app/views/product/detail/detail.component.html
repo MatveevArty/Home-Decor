@@ -64,9 +64,11 @@
         </div>
 
         <div class="detail-info-actions">
-          <button class="button button-transparent button-icon">
-            <img src="assets/images/icons/button-heart.svg" alt="Сердечко">
-            <span>В избранное</span>
+          <button class="button button-transparent button-icon" (click)="updateFavorite()">
+            <img src="assets/images/icons/heart-empty-for-favorite-button.svg" alt="Сердечко" *ngIf="!product.isInFavorite">
+            <img src="assets/images/icons/heart-full-for-favorite-button.svg" alt="Сердечко" *ngIf="product.isInFavorite">
+            <span *ngIf="!product.isInFavorite">В избранное</span>
+            <span *ngIf="product.isInFavorite">В избранном</span>
           </button>
 
           <button class="button" (click)="addToCart()" *ngIf="!this.product.countInCart">В корзину</button>
