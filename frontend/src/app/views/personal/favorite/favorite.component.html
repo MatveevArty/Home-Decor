@@ -2,7 +2,13 @@
   <div class="container">
     <div class="favorite-title">Избранное</div>
 
-    <div class="favorite-products">
+    <div class="favorite-empty" *ngIf="!favoriteProducts || favoriteProducts.length === 0">
+      <div>В избранном нет товаров</div>
+
+      <button [routerLink]="'/catalog'" class="button">В каталог</button>
+    </div>
+
+    <div class="favorite-products" *ngIf="favoriteProducts && favoriteProducts.length === 0">
       <div class="favorite-product" *ngFor="let product of favoriteProducts">
         <div class="favorite-product-image" style="background-image: url({{ this.serverStaticPath + product.image }})"></div>
 
@@ -14,7 +20,7 @@
           <button class="button" [routerLink]="'product/' + product.url">Открыть</button>
         </div>
 
-        <div class="favorite-product-remove">
+        <div class="favorite-product-remove" (click)="removeFromFavorites(product.id)">
           <img src="assets/images/icons/closing-cross.svg" alt="Крестик">
         </div>
       </div>

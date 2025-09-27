@@ -10,6 +10,19 @@
     margin-bottom: 35px;
   }
 
+  &-empty {
+    margin: 20px 0 100px 0;
+
+    div {
+      font-size: 16px;
+    }
+
+    .button {
+      width: 255px;
+      margin-top: 10px;
+    }
+  }
+
   &-products {
 
     .favorite-product {

@@ -35,4 +35,19 @@ export class FavoriteComponent implements OnInit {
       });
   }
 
+  /**
+   * Удаление товара из Избранное
+   * @param id айди товара
+   */
+  public removeFromFavorites(id: string): void {
+    this.favoriteService.removeFavorite(id)
+      .subscribe((data: DefaultResponseType) => {
+        if (data.error) {
+          // some processing
+          throw new Error(data.message);
+        }
+
+        this.favoriteProducts = this.favoriteProducts.filter((item) => item.id !== id);
+      })
+  }
 }
