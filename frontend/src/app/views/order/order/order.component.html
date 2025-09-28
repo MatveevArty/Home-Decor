@@ -83,9 +83,8 @@
           <div class="data-form-label">Комментарий к заказу (необязательно)</div>
 
           <div class="data-form-inputs">
-            <textarea class="input" cols="30" rows="5" placeholder="Улица" [formControlName]="'comment'"
+            <textarea class="input" cols="30" rows="5" placeholder="Оставьте свой комментарий..." [formControlName]="'comment'"
                       [ngStyle]="{ 'border-color': apartment?.invalid && (apartment?.dirty || apartment?.touched) ? 'red' : ''}">
-              Оставьте свой комментарий...
             </textarea>
           </div>
         </div>
