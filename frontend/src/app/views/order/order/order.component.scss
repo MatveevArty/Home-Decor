@@ -163,3 +163,31 @@
     }
   }
 }
+
+
+.order-popup {
+  padding: 100px 70px 220px;
+  position: relative;
+  text-align: center;
+  color: $green-text-color;
+  background-image: url("../../../../assets/images/page/order/popup-flower.png");
+  background-position: bottom center;
+  background-repeat: no-repeat;
+
+  &-close {
+    position: absolute;
+    cursor: pointer;
+    top: 30px;
+    right: 30px;
+  }
+
+  &-title {
+    @include head-lora-32;
+    margin-bottom: 40px;
+  }
+
+  &-content div {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+}

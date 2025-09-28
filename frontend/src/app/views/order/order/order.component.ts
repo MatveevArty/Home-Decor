@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {CartService} from "../../../shared/services/cart.service";
 import {CartType} from "../../../../types/cart.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
@@ -7,6 +7,8 @@ import {Router} from "@angular/router";
 import {DeliveryType} from "../../../../types/delivery.type";
 import {FormBuilder, Validators} from "@angular/forms";
 import {PaymentTypes} from "../../../../types/payment.type";
+import {MatDialog} from "@angular/material/dialog";
+import {MatDialogRef} from "@angular/material/dialog/dialog-ref";
 
 @Component({
   selector: 'app-order',
@@ -62,10 +64,18 @@ export class OrderComponent implements OnInit {
     comment: [''],
   })
 
+  @ViewChild('popup') popup!: TemplateRef<ElementRef>;
+
+  /**
+   * Попап
+   */
+  public dialogRef: MatDialogRef<any, any> | null = null;
+
   constructor(private cartService: CartService,
               private _snackBar: MatSnackBar,
               private router: Router,
-              private fb: FormBuilder,) {
+              private fb: FormBuilder,
+              private matDialog: MatDialog,) {
     this.updateDeliveryTypeValidation();
   }
 
@@ -212,9 +222,26 @@ export class OrderComponent implements OnInit {
   }
 
 
+  /**
+   * Соаздние заказа
+   */
   public createOrder(): void {
-    if (this.orderForm.valid) {
-      console.log(this.orderForm.value);
-    }
+    // if (this.orderForm.valid) {
+    //   console.log(this.orderForm.value);
+
+      this.dialogRef = this.matDialog.open(this.popup);
+      this.dialogRef.backdropClick()
+        .subscribe(() => {
+          this.router.navigate(['/']);
+        })
+    // }
+  }
+
+  /**
+   * Закрытие попапа по крестику
+   */
+  public closePopup(): void {
+    this.dialogRef?.close();
+    this.router.navigate(['/']);
   }
 }

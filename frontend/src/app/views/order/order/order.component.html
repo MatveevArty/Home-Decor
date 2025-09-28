@@ -121,3 +121,19 @@
     </div>
   </div>
 </div>
+
+<ng-template #popup>
+  <div class="order-popup">
+    <div class="order-popup-close" (click)="closePopup()">
+      <img src="assets/images/icons/closing-cross.svg" alt="Крестик">
+    </div>
+
+    <div class="order-popup-title">Благодарим за заказ!</div>
+
+    <div class="order-popup-content">
+      <div>Ваш заказ оформлен.</div>
+      <div>Вся информация о заказе была выслана вам на почту.</div>
+      <div>Курьер свяжется с вами за два часа до доставки товара.</div>
+    </div>
+  </div>
+</ng-template>
