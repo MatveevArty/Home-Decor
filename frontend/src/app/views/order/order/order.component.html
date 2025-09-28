@@ -3,23 +3,23 @@
     <div class="order-title">Оформление вашего заказа</div>
 
     <div class="order-info">
-      <div class="order-form" [formGroup]="orderForm">
-        <div class="order-form-block">
-          <div class="order-form-label">Выберите способ доставки</div>
+      <div class="data-form" [formGroup]="orderForm">
+        <div class="data-form-block">
+          <div class="data-form-label">Выберите способ доставки</div>
 
-          <div class="order-form-types">
-            <div class="order-form-types-item" [class.active]="deliveryType === deliveryTypes.delivery"
+          <div class="data-form-types">
+            <div class="data-form-types-item" [class.active]="deliveryType === deliveryTypes.delivery"
                  (click)="changeDeliveryType(deliveryTypes.delivery)">Курьером</div>
 
-            <div class="order-form-types-item" [class.active]="deliveryType === deliveryTypes.self"
+            <div class="data-form-types-item" [class.active]="deliveryType === deliveryTypes.self"
                  (click)="changeDeliveryType(deliveryTypes.self)">Самовывоз</div>
           </div>
         </div>
 
-        <div class="order-form-block">
-          <div class="order-form-label">Заполните личные данные</div>
+        <div class="data-form-block">
+          <div class="data-form-label">Заполните личные данные</div>
 
-          <div class="order-form-inputs personal-data-inputs">
+          <div class="data-form-inputs personal-data-inputs">
             <input type="text" placeholder="Фамилия" class="input" [formControlName]="'lastName'"
                    [ngStyle]="{ 'border-color': lastName?.invalid && (lastName?.dirty || lastName?.touched) ? 'red' : '' }">
 
@@ -37,10 +37,10 @@
           </div>
         </div>
 
-        <div class="order-form-block" *ngIf="this.deliveryType !== this.deliveryTypes.self">
-          <div class="order-form-label">Заполните адрес доставки</div>
+        <div class="data-form-block" *ngIf="this.deliveryType !== this.deliveryTypes.self">
+          <div class="data-form-label">Заполните адрес доставки</div>
 
-          <div class="order-form-inputs address-inputs">
+          <div class="data-form-inputs address-inputs">
             <input type="text" placeholder="Улица" class="input input-street" [formControlName]="'street'"
                    [ngStyle]="{ 'border-color': street?.invalid && (street?.dirty || street?.touched) ? 'red' : ''}">
 
@@ -55,23 +55,23 @@
           </div>
         </div>
 
-        <div class="order-form-block">
-          <div class="order-form-label">Выберите способ оплаты</div>
+        <div class="data-form-block">
+          <div class="data-form-label">Выберите способ оплаты</div>
 
-          <div class="order-form-radios">
-            <div class="order-form-radios-block">
+          <div class="data-form-radios">
+            <div class="data-form-radios-block">
               <input type="radio" id="card" value="{{ paymentTypes.cardOnline }}" [formControlName]="'paymentType'">
 
               <label for="card">Оплата банковской картой в интернет-магазине</label>
             </div>
 
-            <div class="order-form-radios-block">
+            <div class="data-form-radios-block">
               <input type="radio" id="cashless" value="{{ paymentTypes.cardToCourier }}" [formControlName]="'paymentType'">
 
               <label for="cashless">Безналичный расчет при получении</label>
             </div>
 
-            <div class="order-form-radios-block">
+            <div class="data-form-radios-block">
               <input type="radio" id="cash" value="{{ paymentTypes.cashToCourier }}" [formControlName]="'paymentType'">
 
               <label for="cash">Наличный расчет при получении</label>
@@ -79,10 +79,10 @@
           </div>
         </div>
 
-        <div class="order-form-block">
-          <div class="order-form-label">Комментарий к заказу (необязательно)</div>
+        <div class="data-form-block">
+          <div class="data-form-label">Комментарий к заказу (необязательно)</div>
 
-          <div class="order-form-inputs">
+          <div class="data-form-inputs">
             <textarea class="input" cols="30" rows="5" placeholder="Улица" [formControlName]="'comment'"
                       [ngStyle]="{ 'border-color': apartment?.invalid && (apartment?.dirty || apartment?.touched) ? 'red' : ''}">
               Оставьте свой комментарий...
