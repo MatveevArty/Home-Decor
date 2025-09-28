@@ -273,6 +273,8 @@ export class OrderComponent implements OnInit {
               .subscribe(() => {
                 this.router.navigate(['/']);
               })
+
+            this.cartService.setCount(0);
           },
           error: (errorResponse: HttpErrorResponse) => {
             if (errorResponse.error && errorResponse.error.message) {

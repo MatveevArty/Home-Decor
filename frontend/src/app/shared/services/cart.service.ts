@@ -13,7 +13,7 @@ export class CartService {
   /**
    * Счётчик количества всех товаров корзины
    */
-  public count: number = 0;
+  private count: number = 0;
 
   /**
    * Сабджект счётчика количества всех товаров корзины
@@ -21,6 +21,15 @@ export class CartService {
   public count$: Subject<number> = new Subject<number>();
 
   constructor(private http: HttpClient) { }
+
+  /**
+   * Установка значения в счётчик колчиества товаров в корзине
+   * @param count количество товаров в корзине
+   */
+  public setCount(count: number) {
+    this.count = count;
+    this.count$.next(count);
+  }
 
   /**
    * Запрос на получение конкретного продукта
@@ -37,8 +46,7 @@ export class CartService {
       .pipe(
         tap((data => {
           if (!data.hasOwnProperty('error')) {
-            this.count = (data as { count: number }).count;
-            this.count$.next(this.count);
+            this.setCount((data as { count: number }).count)
           }
         }))
       )
@@ -54,11 +62,12 @@ export class CartService {
       .pipe(
         tap((data => {
           if (!data.hasOwnProperty('error')) {
-            this.count = 0;
+            let count = 0;
             (data as CartType).items.forEach(item => {
-              this.count = this.count + item.quantity;
+              count = this.count + item.quantity;
             });
-            this.count$.next(this.count);
+
+            this.setCount(count);
           }
         }))
       )
