@@ -6,9 +6,12 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {DeliveryType} from "../../../../types/delivery.type";
 import {FormBuilder, Validators} from "@angular/forms";
-import {PaymentTypes} from "../../../../types/payment.type";
+import {PaymentType} from "../../../../types/payment.type";
 import {MatDialog} from "@angular/material/dialog";
 import {MatDialogRef} from "@angular/material/dialog/dialog-ref";
+import {OrderService} from "../../../shared/services/order.service";
+import {OrderType} from "../../../../types/order.type";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-order',
@@ -45,7 +48,7 @@ export class OrderComponent implements OnInit {
   /**
    * Енам типов оплаты
    */
-  public paymentTypes = PaymentTypes;
+  public paymentTypes = PaymentType;
 
   /**
    * Форма с данными заказа
@@ -55,7 +58,7 @@ export class OrderComponent implements OnInit {
     firstName: ['', Validators.required],
     fatherName: [''],
     phone: ['', Validators.required],
-    paymentType: [PaymentTypes.cashToCourier, Validators.required],
+    paymentType: [PaymentType.cashToCourier, Validators.required],
     email: ['', [Validators.required, Validators.email]],
     street: [''],
     house: [''],
@@ -75,7 +78,8 @@ export class OrderComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private router: Router,
               private fb: FormBuilder,
-              private matDialog: MatDialog,) {
+              private matDialog: MatDialog,
+              private orderService: OrderService) {
     this.updateDeliveryTypeValidation();
   }
 
@@ -226,15 +230,59 @@ export class OrderComponent implements OnInit {
    * Соаздние заказа
    */
   public createOrder(): void {
-    // if (this.orderForm.valid) {
-    //   console.log(this.orderForm.value);
+    if (this.orderForm.valid && this.firstName?.value && this.lastName?.value
+      && this.phone?.value && this.paymentType?.value && this.email?.value) {
 
-      this.dialogRef = this.matDialog.open(this.popup);
-      this.dialogRef.backdropClick()
-        .subscribe(() => {
-          this.router.navigate(['/']);
-        })
-    // }
+      const paramsObject: OrderType = {
+        deliveryType: this.deliveryType,
+        firstName: this.firstName?.value,
+        lastName: this.lastName?.value,
+        phone: this.phone?.value,
+        paymentType: this.paymentType?.value,
+        email: this.email?.value,
+      }
+
+      if (this.deliveryType === DeliveryType.delivery) {
+        if (this.street?.value) {
+          paramsObject.street = this.street?.value;
+        }
+        if (this.house?.value) {
+          paramsObject.house = this.house?.value;
+        }
+        if (this.entrance?.value) {
+          paramsObject.entrance = this.entrance?.value;
+        }
+        if (this.apartment?.value) {
+          paramsObject.apartment = this.apartment?.value;
+        }
+      }
+
+      if (this.comment?.value) {
+        paramsObject.comment = this.comment?.value;
+      }
+
+      this.orderService.createOrder(paramsObject)
+        .subscribe({
+          next: (data: OrderType | DefaultResponseType) => {
+            if ((data as DefaultResponseType).error !== undefined) {
+              throw new Error((data as DefaultResponseType).message);
+            }
+
+            this.dialogRef = this.matDialog.open(this.popup);
+            this.dialogRef.backdropClick()
+              .subscribe(() => {
+                this.router.navigate(['/']);
+              })
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Ошибка создания заказа');
+            }
+          },
+        });
+    }
   }
 
   /**
