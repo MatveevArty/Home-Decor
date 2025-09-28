@@ -3,7 +3,7 @@
     <div class="order-title">Оформление вашего заказа</div>
 
     <div class="order-info">
-      <div class="order-form">
+      <div class="order-form" [formGroup]="orderForm">
         <div class="order-form-block">
           <div class="order-form-label">Выберите способ доставки</div>
 
@@ -20,22 +20,38 @@
           <div class="order-form-label">Заполните личные данные</div>
 
           <div class="order-form-inputs personal-data-inputs">
-            <input type="text" placeholder="Фамилия" class="input">
-            <input type="text" placeholder="Имя" class="input">
-            <input type="text" placeholder="Отчество" class="input">
-            <input type="text" placeholder="Телефон" class="input">
-            <input type="text" placeholder="E-mail" class="input">
+            <input type="text" placeholder="Фамилия" class="input" [formControlName]="'lastName'"
+                   [ngStyle]="{ 'border-color': lastName?.invalid && (lastName?.dirty || lastName?.touched) ? 'red' : '' }">
+
+            <input type="text" placeholder="Имя" class="input" [formControlName]="'firstName'"
+                   [ngStyle]="{ 'border-color': firstName?.invalid && (firstName?.dirty || firstName?.touched) ? 'red' : ''}">
+
+            <input type="text" placeholder="Отчество" class="input" [formControlName]="'fatherName'"
+                   [ngStyle]="{ 'border-color': fatherName?.invalid && (fatherName?.dirty || fatherName?.touched) ? 'red' : ''}">
+
+            <input type="text" placeholder="Телефон" class="input" [formControlName]="'phone'"
+                   [ngStyle]="{ 'border-color': phone?.invalid && (phone?.dirty || phone?.touched) ? 'red' : ''}">
+
+            <input type="text" placeholder="E-mail" class="input" [formControlName]="'email'"
+                   [ngStyle]="{ 'border-color': email?.invalid && (email?.dirty || email?.touched) ? 'red' : ''}">
           </div>
         </div>
 
-        <div class="order-form-block">
+        <div class="order-form-block" *ngIf="this.deliveryType !== this.deliveryTypes.self">
           <div class="order-form-label">Заполните адрес доставки</div>
 
           <div class="order-form-inputs address-inputs">
-            <input type="text" placeholder="Улица" class="input input-street">
-            <input type="text" placeholder="№ дома"  class="input input-house">
-            <input type="text" placeholder="Подъезд"  class="input input-entrance">
-            <input type="text" placeholder="№ квартиры"  class="input input-apart">
+            <input type="text" placeholder="Улица" class="input input-street" [formControlName]="'street'"
+                   [ngStyle]="{ 'border-color': street?.invalid && (street?.dirty || street?.touched) ? 'red' : ''}">
+
+            <input type="text" placeholder="№ дома" class="input input-house" [formControlName]="'house'"
+                   [ngStyle]="{ 'border-color': house?.invalid && (house?.dirty || house?.touched) ? 'red' : ''}">
+
+            <input type="text" placeholder="Подъезд" class="input input-entrance" [formControlName]="'entrance'"
+                   [ngStyle]="{ 'border-color': entrance?.invalid && (entrance?.dirty || entrance?.touched) ? 'red' : ''}">
+
+            <input type="text" placeholder="№ квартиры" class="input input-apart" [formControlName]="'apartment'"
+                   [ngStyle]="{ 'border-color': apartment?.invalid && (apartment?.dirty || apartment?.touched) ? 'red' : ''}">
           </div>
         </div>
 
@@ -44,19 +60,19 @@
 
           <div class="order-form-radios">
             <div class="order-form-radios-block">
-              <input type="radio" id="card">
+              <input type="radio" id="card" value="{{ paymentTypes.cardOnline }}" [formControlName]="'paymentType'">
 
               <label for="card">Оплата банковской картой в интернет-магазине</label>
             </div>
 
             <div class="order-form-radios-block">
-              <input type="radio" id="cashless">
+              <input type="radio" id="cashless" value="{{ paymentTypes.cardToCourier }}" [formControlName]="'paymentType'">
 
               <label for="cashless">Безналичный расчет при получении</label>
             </div>
 
             <div class="order-form-radios-block">
-              <input type="radio" id="cash">
+              <input type="radio" id="cash" value="{{ paymentTypes.cashToCourier }}" [formControlName]="'paymentType'">
 
               <label for="cash">Наличный расчет при получении</label>
             </div>
@@ -67,7 +83,10 @@
           <div class="order-form-label">Комментарий к заказу (необязательно)</div>
 
           <div class="order-form-inputs">
-            <textarea class="input" cols="30" rows="5" placeholder="Улица">Оставьте свой комментарий...</textarea>
+            <textarea class="input" cols="30" rows="5" placeholder="Улица" [formControlName]="'comment'"
+                      [ngStyle]="{ 'border-color': apartment?.invalid && (apartment?.dirty || apartment?.touched) ? 'red' : ''}">
+              Оставьте свой комментарий...
+            </textarea>
           </div>
         </div>
       </div>
@@ -97,7 +116,7 @@
           </div>
         </div>
 
-        <button class="button">Подтвердить заказ</button>
+        <button class="button" (click)="createOrder()">Подтвердить заказ</button>
       </div>
     </div>
   </div>

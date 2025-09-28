@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../../shared/services/cart.service";
 import {CartType} from "../../../../types/cart.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {DeliveryType} from "../../../../types/delivery.type";
+import {FormBuilder, Validators} from "@angular/forms";
+import {PaymentTypes} from "../../../../types/payment.type";
 
 @Component({
   selector: 'app-order',
@@ -38,9 +40,34 @@ export class OrderComponent implements OnInit {
    */
   public totalCount: number = 0;
 
+  /**
+   * Енам типов оплаты
+   */
+  public paymentTypes = PaymentTypes;
+
+  /**
+   * Форма с данными заказа
+   */
+  public orderForm = this.fb.group({
+    lastName: ['', Validators.required],
+    firstName: ['', Validators.required],
+    fatherName: [''],
+    phone: ['', Validators.required],
+    paymentType: [PaymentTypes.cashToCourier, Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    street: [''],
+    house: [''],
+    entrance: [''],
+    apartment: [''],
+    comment: [''],
+  })
+
   constructor(private cartService: CartService,
               private _snackBar: MatSnackBar,
-              private router: Router,) { }
+              private router: Router,
+              private fb: FormBuilder,) {
+    this.updateDeliveryTypeValidation();
+  }
 
   ngOnInit(): void {
     this.cartService.getCart().subscribe(
@@ -59,6 +86,83 @@ export class OrderComponent implements OnInit {
 
         this.calculateTotal();
       });
+  }
+
+  /**
+   * Геттер для поля Фамилия
+   */
+  get lastName() {
+    return this.orderForm.get('lastName');
+  }
+
+  /**
+   * Геттер для поля Имя
+   */
+  get firstName() {
+    return this.orderForm.get('firstName');
+  }
+
+  /**
+   * Геттер для поля Отчество
+   */
+  get fatherName() {
+    return this.orderForm.get('fatherName');
+  }
+
+  /**
+   * Геттер для поля Номер телефона
+   */
+  get phone() {
+    return this.orderForm.get('phone');
+  }
+
+  /**
+   * Геттер для поля Способ оплаты
+   */
+  get paymentType() {
+    return this.orderForm.get('paymentType');
+  }
+
+  /**
+   * Геттер для поля Email
+   */
+  get email() {
+    return this.orderForm.get('email');
+  }
+
+  /**
+   * Геттер для поля Улица
+   */
+  get street() {
+    return this.orderForm.get('street');
+  }
+
+  /**
+   * Геттер для поля Номер дома
+   */
+  get house() {
+    return this.orderForm.get('house');
+  }
+
+  /**
+   * Геттер для поля Подъезд
+   */
+  get entrance() {
+    return this.orderForm.get('entrance');
+  }
+
+  /**
+   * Геттер для поля Квартира
+   */
+  get apartment() {
+    return this.orderForm.get('apartment');
+  }
+
+  /**
+   * Геттер для поля Комментарий
+   */
+  get comment() {
+    return this.orderForm.get('comment');
   }
 
   /**
@@ -83,5 +187,34 @@ export class OrderComponent implements OnInit {
    */
   public changeDeliveryType(type: DeliveryType): void {
     this.deliveryType = type;
+    this.updateDeliveryTypeValidation();
+  }
+
+  /**
+   * Обновление валидации для полей адреса доставки
+   */
+  public updateDeliveryTypeValidation() {
+    if (this.deliveryType === DeliveryType.delivery) {
+      this.street?.setValidators(Validators.required);
+      this.house?.setValidators(Validators.required);
+    } else {
+      this.street?.removeValidators(Validators.required);
+      this.house?.removeValidators(Validators.required);
+
+      this.street?.setValue('');
+      this.house?.setValue('');
+      this.entrance?.setValue('');
+      this.apartment?.setValue('');
+    }
+
+    this.street?.updateValueAndValidity();
+    this.house?.updateValueAndValidity();
+  }
+
+
+  public createOrder(): void {
+    if (this.orderForm.valid) {
+      console.log(this.orderForm.value);
+    }
   }
 }
