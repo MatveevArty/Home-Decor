@@ -8,8 +8,11 @@
           <div class="order-form-label">Выберите способ доставки</div>
 
           <div class="order-form-types">
-            <div class="order-form-types-item active">Курьером</div>
-            <div class="order-form-types-item">Самовывоз</div>
+            <div class="order-form-types-item" [class.active]="deliveryType === deliveryTypes.delivery"
+                 (click)="changeDeliveryType(deliveryTypes.delivery)">Курьером</div>
+
+            <div class="order-form-types-item" [class.active]="deliveryType === deliveryTypes.self"
+                 (click)="changeDeliveryType(deliveryTypes.self)">Самовывоз</div>
           </div>
         </div>
 
@@ -75,12 +78,12 @@
 
           <div class="order-details-info-item first">
             <div class="order-details-info-item-text">Товаров:</div>
-            <div class="order-details-info-item-data">4</div>
+            <div class="order-details-info-item-data">{{ this.totalCount }}</div>
           </div>
 
           <div class="order-details-info-item first">
             <div class="order-details-info-item-text">Общая стоимость:</div>
-            <div class="order-details-info-item-data">147 BYN</div>
+            <div class="order-details-info-item-data">{{ this.totalAmount }} BYN</div>
           </div>
 
           <div class="order-details-info-item first">
@@ -90,7 +93,7 @@
 
           <div class="order-details-info-item first">
             <div class="order-details-info-item-text">Итоговая стоимость:</div>
-            <div class="order-details-info-item-data">157 BYN</div>
+            <div class="order-details-info-item-data">{{ this.totalCount + 10 }} BYN</div>
           </div>
         </div>
 
