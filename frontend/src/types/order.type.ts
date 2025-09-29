@@ -19,6 +19,8 @@ export type OrderType = {
   comment?: string,
   totalAmount?: number,
   status?: OrderStatusType,
+  statusRus?: string,
+  color?: string,
   items?:
     {
       id: string,
