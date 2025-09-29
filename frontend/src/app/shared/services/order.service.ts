@@ -19,4 +19,11 @@ export class OrderService {
   public createOrder(params: OrderType): Observable<OrderType | DefaultResponseType> {
     return this.http.post<OrderType | DefaultResponseType>(environment.api + 'orders', params, { withCredentials: true })
   }
+
+  /**
+   * Запрос на получение заказов пользователя
+   */
+  public getOrders(): Observable<OrderType[] | DefaultResponseType> {
+    return this.http.get<OrderType[] | DefaultResponseType>(environment.api + 'orders')
+  }
 }

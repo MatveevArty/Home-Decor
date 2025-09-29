@@ -1,5 +1,6 @@
 import {DeliveryType} from "./delivery.type";
 import {PaymentType} from "./payment.type";
+import {OrderStatusType} from "./order-status.type";
 
 /**
  * Отправляемые данные о заказе
@@ -16,6 +17,8 @@ export type OrderType = {
   entrance?: string,
   apartment?: string,
   comment?: string,
+  totalAmount?: number,
+  status?: OrderStatusType,
   items?:
     {
       id: string,

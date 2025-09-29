@@ -17,7 +17,7 @@
         <div class="favorite-product-price">{{ product.price }} BYN</div>
 
         <div class="favorite-product-action">
-          <button class="button" [routerLink]="'product/' + product.url">Открыть</button>
+          <button class="button" [routerLink]="'/product/' + product.url">Открыть</button>
         </div>
 
         <div class="favorite-product-remove" (click)="removeFromFavorites(product.id)">
