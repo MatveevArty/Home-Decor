@@ -184,3 +184,7 @@ a.button {
 .cdk-overlay-pane .mat-dialog-container {
   padding: unset;
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #648F64;
+}
