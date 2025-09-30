@@ -29,6 +29,14 @@ export class ProductService {
   }
 
   /**
+   * Запрос на поиск продуктов по введённым символам
+   * @param query введённые символы
+   */
+  public searchProducts(query: string): Observable<ProductType[]> {
+    return this.http.get<ProductType[]>(environment.api + 'products/search?query=' + query)
+  }
+
+  /**
    * Запрос на получение конкретного продукта
    */
   public getProduct(url: string): Observable<ProductType> {
