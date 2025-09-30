@@ -46,7 +46,7 @@
             </button>
           </mat-menu>
 
-          <a [routerLink]="'/favorite'">
+          <a [routerLink]="'/favorite'" *ngIf="isLoggedIn">
             <img src="/assets/images/icons/heart.svg" alt="heart">
           </a>
 

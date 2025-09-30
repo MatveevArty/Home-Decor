@@ -1,7 +1,7 @@
 <div class="product-card"
      *ngIf="product" (click)="navigate()"
      [class.is-light]="isLight">
-  <div class="product-card__favorite" *ngIf="!isLight" (click)="updateFavorite()">
+  <div class="product-card__favorite" *ngIf="!isLight && isLoggedIn" (click)="updateFavorite()">
     <span *ngIf="product.isInFavorite">
       <img src="/assets/images/icons/product-card-heart-touched.svg" alt="heart-favorite">
     </span>

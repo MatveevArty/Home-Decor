@@ -63,8 +63,8 @@
           <div class="detail-info-params-price">{{ product.price }} BYN</div>
         </div>
 
-        <div class="detail-info-actions">
-          <button class="button button-transparent button-icon" (click)="updateFavorite()">
+        <div class="detail-info-actions" >
+          <button class="button button-transparent button-icon" (click)="updateFavorite()" *ngIf="isLoggedIn">
             <img src="assets/images/icons/heart-empty-for-favorite-button.svg" alt="Сердечко" *ngIf="!product.isInFavorite">
             <img src="assets/images/icons/heart-full-for-favorite-button.svg" alt="Сердечко" *ngIf="product.isInFavorite">
             <span *ngIf="!product.isInFavorite">В избранное</span>

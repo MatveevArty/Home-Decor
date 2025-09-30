@@ -67,12 +67,19 @@ export class DetailComponent implements OnInit {
    */
   public serverStaticPath = environment.serverStaticPath;
 
+  /**
+   * Флаг факта логина пользователем
+   */
+  public isLoggedIn: boolean = false;
+
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
               private cartService: CartService,
               private favoriteService: FavoriteService,
               private authService: AuthService,
-              private _snackBar: MatSnackBar,) { }
+              private _snackBar: MatSnackBar,) {
+    this.isLoggedIn = this.authService.getIsLoggedIn();
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
