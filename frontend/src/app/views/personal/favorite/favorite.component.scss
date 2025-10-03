@@ -57,7 +57,7 @@
 
       &-price {
         width: 100px;
-        margin-right: 193px;
+        margin-right: 50px;
         font-family: 'Montserrat', sans-serif;
         font-style: normal;
         font-weight: 600;
@@ -65,8 +65,21 @@
         color: $gray-text-color;
       }
 
-      &-action button {
-        width: 160px;
+      &-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        row-gap: 10px;
+        width: 150px;
+
+        .favorite-product-cart {
+          width: 100%;
+
+          .button {
+            width: 100%;
+          }
+        }
       }
 
       &-remove {
