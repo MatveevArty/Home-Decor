@@ -64,7 +64,7 @@ export class CartService {
           if (!data.hasOwnProperty('error')) {
             let count = 0;
             (data as CartType).items.forEach(item => {
-              count = this.count + item.quantity;
+              count += item.quantity;
             });
 
             this.setCount(count);
